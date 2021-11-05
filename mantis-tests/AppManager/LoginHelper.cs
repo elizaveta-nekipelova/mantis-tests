@@ -9,7 +9,12 @@ namespace mantis_tests
 {
     public class LoginHelper : HelperBase
     {
-        public LoginHelper(ApplicationManager manager) : base(manager) { }
+        private string baseUrl;
+
+        public LoginHelper(ApplicationManager manager, String baseUrl) : base(manager) 
+        {
+            this.baseUrl = baseUrl;
+        }
 
         public void Login(AccountData account)
         {
@@ -25,7 +30,7 @@ namespace mantis_tests
 
         public void GoToLoginPage()
         {
-            manager.Driver.Url = "http://localhost/mantisbt-2.25.2/mantisbt-2.25.2/login_page.php";
+            manager.Driver.Url = baseUrl + "/login_page.php";
         }
 
         public bool IsLoggedIn()

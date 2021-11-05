@@ -13,25 +13,29 @@ namespace mantis_tests
     public class ApplicationManager
     {
         protected IWebDriver driver;
-        protected string baseURL;
+        protected string baseUrl;
 
         public RegistrationHelper Registration { get; set; }
         public FtpHelper Ftp { get; }
         public LoginHelper Auth { get; }
         public NavigationHelper Navigator { get; }
         public ProjectManagementHelper Project { get; }
+        public AdminHelper Admin { get; }
+        public ApiHelper API { get; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook/";
+            baseUrl = "http://localhost/mantisbt-2.25.2/mantisbt-2.25.2";
             Registration = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
-            Auth = new LoginHelper(this);
+            Auth = new LoginHelper(this, baseUrl);
             Navigator = new NavigationHelper(this);
             Project = new ProjectManagementHelper(this);
+            Admin = new AdminHelper(this, baseUrl);
+            API = new ApiHelper(this);
         }
 
         public static ApplicationManager GetInstance()
@@ -39,7 +43,7 @@ namespace mantis_tests
             if (!app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-2.25.2/mantisbt-2.25.2/login_page.php";
+                newInstance.driver.Url = newInstance.baseUrl + "/login_page.php";
                 app.Value = newInstance;
             }
             return app.Value;

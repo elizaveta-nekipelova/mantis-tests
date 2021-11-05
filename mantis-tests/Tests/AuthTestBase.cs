@@ -9,6 +9,12 @@ namespace mantis_tests
 {
     public class AuthTestBase : TestBase
     {
+        public static AccountData adminAccount = new AccountData()
+        {
+            Name = "administrator",
+            Password = "root"
+        };
+
         [SetUp]
         public void SetupLogin()
         {

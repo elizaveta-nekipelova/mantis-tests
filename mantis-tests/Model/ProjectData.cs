@@ -13,6 +13,8 @@ namespace mantis_tests
             Name = name;
         }
 
+        public ProjectData() { }
+
         public bool Equals(ProjectData other)
         {
             if (ReferenceEquals(other, null))
@@ -36,6 +38,8 @@ namespace mantis_tests
             }
             return Name.CompareTo(other.Name);
         }
+
+        public string Id { get; set; }
 
         public string Name { get; set; }
 

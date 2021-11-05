@@ -18,6 +18,8 @@ namespace mantis_tests
             Password = password;
         }
 
+        public string Id { get; internal set; }
+
         public string Name { get; set; }
 
         public string Password { get; set; }
